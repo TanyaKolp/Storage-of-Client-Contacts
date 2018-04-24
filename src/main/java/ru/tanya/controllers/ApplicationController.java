@@ -19,19 +19,14 @@ public class ApplicationController {
     @Autowired
     private ApplicationService service;
 
-    @GetMapping
-    public String hello() {
-        return "hello";
-    }
-
     @GetMapping(value = "/last_application/{contactId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApplicationDto> getJsonLastApplication(@PathVariable  Long contactId) {
+    public ResponseEntity<ApplicationDto> getJsonLastApplication(@PathVariable Long contactId) {
         ApplicationDto lastApp = service.getLastApplicationByContact(contactId);
         return new ResponseEntity<>(lastApp, HttpStatus.OK);
     }
 
     @GetMapping(value = "/last_application/xml/{contactId}", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<ApplicationDto> getXmlLastApplication(@PathVariable  Long contactId) {
+    public ResponseEntity<ApplicationDto> getXmlLastApplication(@PathVariable Long contactId) {
         ApplicationDto lastApp = service.getLastApplicationByContact(contactId);
         return new ResponseEntity<>(lastApp, HttpStatus.OK);
     }
