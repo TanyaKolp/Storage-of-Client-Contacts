@@ -1,8 +1,6 @@
 package ru.tanya.entities;
 
 import javax.persistence.*;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
