@@ -1,7 +1,7 @@
 package ru.tanya.entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Applications")
@@ -16,7 +16,7 @@ public class Application {
     private String productName;
 
     @Column(name = "DT_CREATED")
-    private Date created;
+    private LocalDateTime created;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CONTACT_ID")
@@ -39,11 +39,11 @@ public class Application {
         this.productName = productName;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
