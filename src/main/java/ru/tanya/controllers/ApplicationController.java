@@ -11,21 +11,23 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.tanya.dto.ApplicationDto;
 import ru.tanya.service.ApplicationService;
 
-import java.util.Objects;
-
 @RestController
 @RequestMapping("/")
 public class ApplicationController {
     @Autowired
     private ApplicationService service;
 
-    @GetMapping(value = "/last_application/{contactId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/last_application/{contactId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApplicationDto> getJsonLastApplication(@PathVariable Long contactId) {
         ApplicationDto lastApp = service.getLastApplicationByContact(contactId);
         return new ResponseEntity<>(lastApp, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/last_application/xml/{contactId}", produces = MediaType.APPLICATION_XML_VALUE)
+    @GetMapping(value = "/last_application/{contactId}",
+            consumes = MediaType.APPLICATION_XML_VALUE,
+            produces = {MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<ApplicationDto> getXmlLastApplication(@PathVariable Long contactId) {
         ApplicationDto lastApp = service.getLastApplicationByContact(contactId);
         return new ResponseEntity<>(lastApp, HttpStatus.OK);
