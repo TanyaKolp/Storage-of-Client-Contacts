@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.tanya.dto.ApplicationDto;
 import ru.tanya.entities.Application;
+import ru.tanya.exceptions.NoContactException;
 import ru.tanya.repositories.ApplicationRepository;
 
 import javax.transaction.Transactional;
@@ -18,7 +19,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     public ApplicationDto getLastApplicationByContact(Long contactId) {
         Application lastApp = applicationRepository.findTopByContactIdOrderByCreatedDesc(contactId);
         if (Objects.isNull(lastApp)) {
-            throw new IllegalArgumentException("No contact #" + contactId);
+            throw new NoContactException();
         }
         return convertToDto(lastApp);
     }
