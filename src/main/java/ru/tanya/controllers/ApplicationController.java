@@ -17,20 +17,16 @@ public class ApplicationController {
     @Autowired
     private ApplicationService service;
 
+
+    /**
+     *в @RequestMapping параметр produces отвечает за Заголовок Accept
+     * (Список допустимых форматов ресурса) в запросе,
+     * consumer - за Заголовок Content-Type	(Формат и способ представления сущности.) в запросе
+     * */
     @GetMapping(value = "/last_application/{contactId}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<ApplicationDto> getJsonLastApplication(@PathVariable Long contactId) {
         ApplicationDto lastApp = service.getLastApplicationByContact(contactId);
         return new ResponseEntity<>(lastApp, HttpStatus.OK);
     }
-
-    @GetMapping(value = "/last_application/{contactId}",
-            consumes = MediaType.APPLICATION_XML_VALUE,
-            produces = {MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<ApplicationDto> getXmlLastApplication(@PathVariable Long contactId) {
-        ApplicationDto lastApp = service.getLastApplicationByContact(contactId);
-        return new ResponseEntity<>(lastApp, HttpStatus.OK);
-    }
-
 }
